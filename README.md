@@ -1,4 +1,4 @@
-
+"""
 flister.py> Running...
 ================================================================================
 Aranan islev strcpy, 0x00101f90 adresinde:
@@ -40,5 +40,5 @@ islev strcpy icin xreferanslar, 0x0010d098 adresinde:
     Referans, 0x00109eb8 adresinde
     Referans, 0x00101f90 adresinde
 flister.py> Finished!
-
+"""
 
