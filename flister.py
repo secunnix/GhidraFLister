@@ -85,9 +85,6 @@ def print_zafiyet(line, satir_numarasi):
 	#Bitis
 
         print_xrefs(islev)
-    
-
-
 
 def satir_isle(satir, satir_numarasi):
     vulnerable_functions = ["memcpy", "strcpy", "strncpy", "sprintf", "vsprintf", "gets", "scanf", "fscanf", "sscanf", "read"]
