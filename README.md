@@ -5,7 +5,7 @@ This extension allows you to find vulnerable functions in code structures writte
 * Python based struct 
 * Easier and faster usage style compared to similar plugins.
 
-![github dev](https://srv2.imgonline.com.ua/result_img/imgonline-com-ua-twotoone-tYVkkOo2m70mQZW.jpg)
+![github dev](https://i.ibb.co/pJwP32b/imgonline-com-ua-twotoone-t-YVkk-Oo2m70m-QZW.jpg)
 
 # Why?
 It has been produced to detect the misuse of functions known to have vulnerabilities in C-based applications with a single script structure.
