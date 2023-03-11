@@ -6,6 +6,7 @@ import os
 import json
 import glob
 
+mevcut_prg = getCurrentProgram()
 #Dizini belirtebilirsiniz
 decompile_dizin = "/tmp/splunks/"
 if not os.path.exists(decompile_dizin):
@@ -119,7 +120,6 @@ def satir_isle(satir, satir_numarasi):
 
 
 
-mevcut_prg = getCurrentProgram()
 
 for islev in mevcut_prg.getFunctionManager().getFunctions(True):
     if islev.getName() in ["memcpy", "strcpy", "strncpy", "sprintf", "vsprintf", "gets", "scanf", "fscanf", "sscanf", "read"]:
