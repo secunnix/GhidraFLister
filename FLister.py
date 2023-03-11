@@ -1,7 +1,10 @@
 # -*- coding: utf-8 -*-
 from ghidra.program.model.symbol import SourceType
 from ghidra.app.decompiler import DecompInterface
+import subprocess
 import os
+import json
+import glob
 
 #Dizini belirtebilirsiniz
 decompile_dizin = "/tmp/splunks/"
@@ -86,11 +89,38 @@ def print_zafiyet(line, satir_numarasi):
 
         print_xrefs(islev)
 
+def semgrep_ile_tara(dizin):
+    
+    dosya_deseni = "*" 
+    dosya_yolu = glob.glob(dizin + dosya_deseni)
+
+    for i in range(0,len(dosya_yolu),1):
+
+       semgrep_komut = ["/home/sazak/.local/bin/semgrep", "-c", "/tmp/semgrep-rules/c/signed-unsigned-conversion.yaml", dosya_yolu[i]]
+       semgrep_cikti = subprocess.Popen(semgrep_komut, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+
+       output, error = semgrep_cikti.communicate()
+       #print(error)
+    
+       try:
+	   print(output)
+	   with open('/tmp/semgrep_sonuc.txt', 'a') as f:
+                #json.dump(results, f)
+	        f.write(output)
+		
+       except ValueError:
+           print("Error: Could not parse Semgrep results as JSON")
+           return
+    
+
+
 def satir_isle(satir, satir_numarasi):
     vulnerable_functions = ["memcpy", "strcpy", "strncpy", "sprintf", "vsprintf", "gets", "scanf", "fscanf", "sscanf", "read"]
     for function in vulnerable_functions:
         if "%s(" % function in satir:
             print_zafiyet(satir, satir_numarasi)
+
+
 
 mevcut_prg = getCurrentProgram()
 
@@ -110,3 +140,4 @@ for islev in mevcut_prg.getFunctionManager().getFunctions(True):
                     line = komut.toString()
                     satir_isle(line, komut.getAddress().getOffset())
                     break
+semgrep_ile_tara(decompile_dizin)
