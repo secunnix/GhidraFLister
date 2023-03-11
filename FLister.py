@@ -96,7 +96,7 @@ def semgrep_ile_tara(dizin):
 
     for i in range(0,len(dosya_yolu),1):
 
-       semgrep_komut = ["/home/sazak/.local/bin/semgrep", "-c", "/tmp/semgrep-rules/c/signed-unsigned-conversion.yaml", dosya_yolu[i]]
+       semgrep_komut = ["semgrep", "-c", "/tmp/semgrep-rules/c/signed-unsigned-conversion.yaml", dosya_yolu[i]]
        semgrep_cikti = subprocess.Popen(semgrep_komut, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 
        output, error = semgrep_cikti.communicate()
@@ -109,11 +109,8 @@ def semgrep_ile_tara(dizin):
 	        f.write(output)
 		
        except ValueError:
-           print("Error: Could not parse Semgrep results as JSON")
            return
     
-
-
 def satir_isle(satir, satir_numarasi):
     vulnerable_functions = ["memcpy", "strcpy", "strncpy", "sprintf", "vsprintf", "gets", "scanf", "fscanf", "sscanf", "read"]
     for function in vulnerable_functions:
